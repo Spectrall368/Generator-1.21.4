@@ -7,5 +7,5 @@
 <#elseif field$type == "WATER">
 (${input$entity}.getType().is(EntityTypeTags.AQUATIC))
 <#else>
-false<#-- fallback for workspaces using UNDEFINED type, as this one no longer exists in 1.21.4+ -->
+false<#-- fallback for workspaces using UNDEFINED type, as this one no longer exists in 1.20.6+ -->
 </#if>
