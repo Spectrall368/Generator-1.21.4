@@ -105,11 +105,6 @@ package ${package}.client.renderer.item;
 		return itemstack;
 	}
 
-	@Override public void getExtents(Set<Vector3f> extentsSet) {
-		PoseStack posestack = new PoseStack();
-		this.model.root().getExtentsForGui(posestack, extentsSet);
-	}
-
 	private static boolean isInventory(ItemDisplayContext type) {
 		return type == ItemDisplayContext.GUI || type == ItemDisplayContext.FIXED;
 	}
