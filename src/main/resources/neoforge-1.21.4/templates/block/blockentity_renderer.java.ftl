@@ -56,7 +56,8 @@ package ${package}.client.renderer.block;
 					"y": "blockEntity.getBlockPos().getY()",
 					"z": "blockEntity.getBlockPos().getZ()",
 					"blockstate": "blockEntity.getBlockState()",
-					"world": "blockEntity.getLevel()"
+					"world": "blockEntity.getLevel()",
+					"entity": "Minecraft.getInstance().player"
 				}, false/>, tickCount);
 			<#else>
 				blockEntity.animationState${animation?index}.animateWhen(true, tickCount);
@@ -126,13 +127,6 @@ package ${package}.client.renderer.block;
 			</#list>
 			super.setupAnim(state);
 		}
-
-		public ModelPart getRoot() {
-			return root;
-		}
-
 	}
-
 }
-
 <#-- @formatter:on -->
