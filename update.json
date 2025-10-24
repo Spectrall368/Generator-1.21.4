@@ -1,0 +1,8 @@
+{
+  "generator-1.21.4": {
+    "latest": "1.1",
+	"changes": [
+		"Bug fixes"
+	]
+  }
+}
