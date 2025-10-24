@@ -155,25 +155,38 @@ package ${package}.client.renderer.item;
 		</#list>
 	}
 
-	private static final class AnimatedModel extends ${data.customModelName.split(":")[0]} {
+	private final class AnimatedModel extends ${data.customModelName.split(":")[0]} {
 
-		<#list data.animations as animation>
-		private final KeyframeAnimation keyframeAnimation${animation?index};
-		</#list>
+		private final ModelPart root;
+
+		private final BlockEntityHierarchicalModel animator = new BlockEntityHierarchicalModel();
 
 		public AnimatedModel(ModelPart root) {
 			super(root);
-			<#list data.animations as animation>
-			this.keyframeAnimation${animation?index} = ${animation.animation}.bake(root);
-			</#list>
+			this.root = root;
 		}
 
-		public void setupItemStackAnim(${name}ItemRenderer renderer, ItemStack itemstack, LivingEntityRenderState state) {
-			this.root().getAllParts().forEach(ModelPart::resetPose);
-			<#list data.animations as animation>
-			this.keyframeAnimation${animation?index}.apply(renderer.getAnimationState(itemstack).get(${animation?index}), state.ageInTicks, ${animation.speed}f);
-			</#list>
-			super.setupAnim(state);
+		public void setupItemStackAnim(ItemStack itemstack, float ageInTicks) {
+			animator.setupItemStackAnim(itemstack, ageInTicks);
+			super.setupAnim(null, 0, 0, ageInTicks, 0, 0);
+		}
+
+		private class BlockEntityHierarchicalModel extends HierarchicalModel<Entity> {
+
+			@Override public ModelPart root() {
+				return root;
+			}
+
+			@Override public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+			}
+
+			public void setupItemStackAnim(ItemStack itemstack, float ageInTicks) {
+				animator.root().getAllParts().forEach(ModelPart::resetPose);
+				<#list data.animations as animation>
+				animator.animate(getAnimationState(itemstack).get(${animation?index}), ${animation.animation}, ageInTicks, ${animation.speed}f);
+				</#list>
+			}
+
 		}
 
 	}
