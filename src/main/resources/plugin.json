@@ -7,6 +7,6 @@
     "description": "This plugin includes a mod, datapack and resourcepack generator for NeoForge ${version}",
     "author": "_Spectrall",
     "updateJSONURL": "https://raw.githubusercontent.com/Spectrall368/Generator-${version}/${mcreatorVersionShort}/update.json",
-    "pluginPageID": 118523
+    "pluginPageID": 120231
   }
 }
