@@ -35,7 +35,7 @@
 
 package ${package}.item;
 
-<#compress>
+<@javacompress>
 <#if data.hasCustomEatResultItem()>
 @EventBusSubscriber
 </#if>
@@ -406,5 +406,5 @@ public class ${name}Item extends <#if data.hasBannerPatterns()>BannerPattern</#i
 		</#if>
 	}
 </#macro>
-</#compress>
+</@javacompress>
 <#-- @formatter:on -->

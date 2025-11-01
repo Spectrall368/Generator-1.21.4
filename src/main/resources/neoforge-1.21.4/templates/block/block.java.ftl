@@ -44,7 +44,7 @@ package ${package}.block;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-<#compress>
+<@javacompress>
 public class ${name}Block extends
 	<#if data.hasGravity>
 		FallingBlock
@@ -735,5 +735,5 @@ public class ${name}Block extends
 	</#list>
 
 }
-</#compress>
+</@javacompress>
 <#-- @formatter:on -->

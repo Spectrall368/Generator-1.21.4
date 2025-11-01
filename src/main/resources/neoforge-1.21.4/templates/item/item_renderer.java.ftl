@@ -51,7 +51,7 @@ package ${package}.client.renderer.item;
 	</#if>
 </#list>
 
-<#compress>
+<@javacompress>
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(Dist.CLIENT) public class ${name}ItemRenderer implements SpecialModelRenderer<ItemStack> {
 
@@ -165,5 +165,5 @@ package ${package}.client.renderer.item;
 	}
 	</#if>
 }
-</#compress>
+</@javacompress>
 <#-- @formatter:on -->
