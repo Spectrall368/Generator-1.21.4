@@ -428,7 +428,7 @@
 		"world": "world",
 		"entity": "entity",
 		"blockstate": "blockstate",
-		"distance": "(double) distance"
+		"distance": "distance"
 	}/>
 }
 </#if>
