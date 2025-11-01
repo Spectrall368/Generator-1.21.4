@@ -103,27 +103,16 @@ public class ${JavaModName}Items {
 				${item.getModElement().getRegistryNameUpper()}_BUCKET =
 					register("${item.getModElement().getRegistryName()}_bucket", ${item.getModElement().getName()}Item::new);
 			<#elseif item.getModElement().getTypeString() == "block" || item.getModElement().getTypeString() == "plant">
-				<#if item.hasSpecialInformation(w)>
+				<#if item.isDoubleBlock()>
+					<#assign hasDoubleBlocks = true>
 					${item.getModElement().getRegistryNameUpper()} =
-						register("${item.getModElement().getRegistryName()}",
-							<#if item.hasCustomItemProperties()>
-								properties -> new ${item.getModElement().getName()}Block.Item(<@blockItemProperties item false/>)
-							<#else>
-								${item.getModElement().getName()}Block.Item::new
-							</#if>
-						);
+						doubleBlock(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
+						<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
 				<#else>
-					<#if item.isDoubleBlock()>
-						<#assign hasDoubleBlocks = true>
-						${item.getModElement().getRegistryNameUpper()} =
-							doubleBlock(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
-							<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
-					<#else>
-						<#assign hasBlocks = true>
-						${item.getModElement().getRegistryNameUpper()} =
-							block(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
-							<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
-					</#if>
+					<#assign hasBlocks = true>
+					${item.getModElement().getRegistryNameUpper()} =
+						block(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
+						<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
 				</#if>
 			<#else>
 				${item.getModElement().getRegistryNameUpper()} =
@@ -143,7 +132,7 @@ public class ${JavaModName}Items {
 	// End of user code block custom items
 
 	private static <I extends Item> DeferredItem<I> register(String name, Function<Item.Properties, ? extends I> supplier) {
-		return REGISTRY.registerItem(name, supplier, new Item.Properties());
+		return REGISTRY.registerItem(name, supplier);
 	}
 
 	<#if hasBlocks>
@@ -206,7 +195,7 @@ public class ${JavaModName}Items {
 		</#if>
 
 		<#if hasItemsWithLeftHandedProperty>
-		@SubscribeEvent @OnlyIn(Dist.CLIENT)  public static void registerItemModelProperties(RegisterConditionalItemModelPropertyEvent event) {
+		@SubscribeEvent @OnlyIn(Dist.CLIENT) public static void registerItemModelProperties(RegisterConditionalItemModelPropertyEvent event) {
 			event.register(ResourceLocation.parse("${modid}:lefthanded"), LegacyLeftHandedProperty.MAP_CODEC);
 		}
 
