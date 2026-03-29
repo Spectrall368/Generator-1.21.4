@@ -38,7 +38,7 @@ jobs:
           echo "MC_VERSION=$(grep '^mcVersion=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_OUTPUT
           echo "MCREATOR_VERSION=$(grep '^mcreatorVersion=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_OUTPUT
       - name: Build release
-        run: ./gradlew build
+        run: gradle build
       - name: Make tag
         id: tag
         run: |
