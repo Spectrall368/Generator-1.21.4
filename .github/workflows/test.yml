@@ -30,6 +30,8 @@ jobs:
           java-version: '21.0.10'
           distribution: 'jetbrains'
           java-package: 'jdk+jcef'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
       - name: Cache Gradle Packages
