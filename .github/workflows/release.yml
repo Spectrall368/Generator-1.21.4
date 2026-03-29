@@ -2,6 +2,7 @@ name: Release
 
 permissions:
   checks: write
+  contents: write
 
 on:
   workflow_dispatch:
