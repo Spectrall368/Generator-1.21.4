@@ -1,6 +1,6 @@
 name: NeoForge for @minecraft (@buildfileversion)
 status: deprecated
-buildfileversion: 21.4.155
+buildfileversion: 21.4.157
 
 import:
   - datapack-1.21.4
