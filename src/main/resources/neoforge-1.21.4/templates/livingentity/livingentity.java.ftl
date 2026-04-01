@@ -732,7 +732,7 @@ public class ${name}Entity extends ${extendsClass} <#if interfaces?size gt 0>imp
 			${name}Entity retval = ${JavaModName}Entities.${REGISTRYNAME}.get().create(serverWorld, EntitySpawnReason.BREEDING);
 			<#if data.aiBase == "Wolf">
 			if (this.isTame()) {
-				retval.setOwnerReference(this.getOwnerReference());
+				retval.setOwnerUUID(this.getOwnerUUID());
 				retval.setTame(true, true);
 			}
 			</#if>

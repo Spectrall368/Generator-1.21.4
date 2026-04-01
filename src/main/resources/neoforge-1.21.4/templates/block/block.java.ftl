@@ -103,7 +103,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 		<#if data.rotationMode == 0 && !statesWithCustomShape?has_content><#-- shape not state dependent -->
 		private static final VoxelShape SHAPE = <@boundingBoxWithRotation data/>;
 		<#else>
-		private final Function<BlockState, VoxelShape> shapes = this.makeShapes();
+		private final ImmutableMap<BlockState, VoxelShape> shapes = this.makeShapes();
 		</#if>
 	</#if>
 
