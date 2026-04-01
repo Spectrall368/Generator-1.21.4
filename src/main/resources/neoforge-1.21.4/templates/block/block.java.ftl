@@ -255,10 +255,10 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 
 	<#if defaultStateCustomShape || statesWithCustomShape?has_content>
 		<#if data.rotationMode != 0 || statesWithCustomShape?has_content>
-		private Function<BlockState, VoxelShape> makeShapes() {
+		private ImmutableMap<BlockState, VoxelShape> makeShapes() {
 			return this.getShapeForEachState(state -> {
 				<#list statesWithCustomShape as state>
-					<#if !state?is_first>else </#if>if (
+				<#if !state?is_first>else </#if>if (
     				<#list state.stateMap.keySet() as property>
 						<#assign value = state.stateMap.get(property)>
 						<#if property.getClass().getSimpleName().equals("StringType")>
@@ -271,26 +271,18 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 				}
 				</#list>
 				return <@boundingBoxWithRotation data data.rotationMode data.enablePitch/>;
-			}
-			<#-- exclude states that don't affect shape -->
-			<#assign usedProperties = data.getPropertiesUsedInStates()>
-			<#if data.isWaterloggable && !usedProperties?contains("waterlogged")>,WATERLOGGED</#if>
-			<#list filteredCustomProperties as prop>
-				<#if !usedProperties?contains(prop.property().getName())>
-				,${prop.property().getName().replace("CUSTOM:", "")?upper_case}
-				</#if>
-			</#list>
-			);
+			});
 		}
 		</#if>
 
 		@Override public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 			<#assign offset = !data.shouldDisableOffset() && !data.isBoundingBoxEmpty()>
+			<#if offset>Vec3 offset = state.getOffset(world, pos);</#if>
 
 			<#if data.rotationMode == 0 && !statesWithCustomShape?has_content><#-- shape not state dependent -->
-			return SHAPE<#if offset>.move(state.getOffset(pos))</#if>;
+			return SHAPE<#if offset>.move(offset.x, offset.y, offset.z)</#if>;
 			<#else><#-- shape is state dependent -->
-			return shapes.apply(state)<#if offset>.move(state.getOffset(pos))</#if>;
+			return shapes.get(state)<#if offset>.move(offset.x, offset.y, offset.z)</#if>;
 			</#if>
 		}
 	</#if>
@@ -803,7 +795,6 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 	<#elseif data.hasGravity><#return "FallingBlock">
 	<#elseif blockBase == "Stairs"><#return "StairBlock">
 	<#elseif blockBase == "Pane"><#return "IronBarsBlock">
-	<#elseif blockBase == "Leaves"><#return "TintedParticleLeavesBlock">
 	<#elseif blockBase == "Sign"><#return "StandingSignBlock">
 	<#elseif blockBase == "HangingSign"><#return "CeilingHangingSignBlock">
 	<#else><#return blockBase + "Block">

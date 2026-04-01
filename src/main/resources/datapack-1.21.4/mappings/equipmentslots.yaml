@@ -31,6 +31,3 @@ armor:
 body:
   - EquipmentSlotGroup.BODY
   - body
-saddle:
-  - EquipmentSlotGroup.SADDLE
-  - saddle
