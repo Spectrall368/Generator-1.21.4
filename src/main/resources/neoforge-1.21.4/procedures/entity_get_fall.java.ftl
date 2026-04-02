@@ -1,1 +1,1 @@
-(${input$entity}.fallDistance)
+/*@float*/(${input$entity}.fallDistance)

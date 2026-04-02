@@ -7,8 +7,7 @@ if (!world.isClientSide()) {
 	BlockState _bs = world.getBlockState(_bp);
 	if(_blockEntity != null) {
 </@head>
-		_blockEntity.getPersistentData().put(${input$tagName}, (CompoundTag) ItemStack.OPTIONAL_CODEC.encode(${mappedMCItemToItemStackCode(input$tagValue, 1)},
-			NbtOps.INSTANCE, new CompoundTag()).result().orElseGet(CompoundTag::new));
+		_blockEntity.getPersistentData().put(${input$tagName}, ${mappedMCItemToItemStackCode(input$tagValue, 1)}.saveOptional(world.registryAccess()));
 <@tail>
 	}
 	if(world instanceof Level _level)

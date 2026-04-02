@@ -277,12 +277,11 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 
 		@Override public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 			<#assign offset = !data.shouldDisableOffset() && !data.isBoundingBoxEmpty()>
-			<#if offset>Vec3 offset = state.getOffset(world, pos);</#if>
 
 			<#if data.rotationMode == 0 && !statesWithCustomShape?has_content><#-- shape not state dependent -->
-			return SHAPE<#if offset>.move(offset.x, offset.y, offset.z)</#if>;
+			return SHAPE<#if offset>.move(state.getOffset(pos))</#if>;
 			<#else><#-- shape is state dependent -->
-			return shapes.get(state)<#if offset>.move(offset.x, offset.y, offset.z)</#if>;
+			return shapes.get(state)<#if offset>.move(state.getOffset(pos))</#if>;
 			</#if>
 		}
 	</#if>
