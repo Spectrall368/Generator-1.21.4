@@ -1,9 +1,9 @@
 # MCreator generator for NeoForge 1.21.4
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Spectrall368/Generator-1.21.4/blob/2026.1/LICENSE)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 MCreator generator plugin for NeoForge 1.21.4.
 
-<img src="https://github.com/Spectrall368/Generator-1.21.4/blob/2026.1/neo_logo.png" width="250" height="250" alt="Plugin logo"/>
+<img src="neo_logo.png" width="256" height="256" alt="Plugin logo"/>
 
 ## How to install
 
