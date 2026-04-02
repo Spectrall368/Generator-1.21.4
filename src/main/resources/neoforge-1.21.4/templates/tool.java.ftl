@@ -201,9 +201,6 @@ public class ${name}Item extends Item {
 			<#if data.stayInGridWhenCrafting && data.usageCount != 0>
 			.setNoCombineRepair()
 			</#if>
-			<#if data.attributeModifiers?size gt 0>
-			.attributes(<@itemAttributeModifiers/>)
-			</#if>
 		);
 	}
 
@@ -241,6 +238,9 @@ public class ${name}Item extends FishingRodItem {
 			</#if>
 			<#if data.stayInGridWhenCrafting && data.usageCount != 0>
 			.setNoCombineRepair()
+			</#if>
+			<#if data.attributeModifiers?size gt 0>
+			.attributes(<@itemAttributeModifiers/>)
 			</#if>
 		);
 	}
